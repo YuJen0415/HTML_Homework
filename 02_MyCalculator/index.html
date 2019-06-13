@@ -4,12 +4,91 @@
 <head>
     <meta charset="UTF-8">
     <title>My Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script>
+        var flag = 0;
+        // 輸入數字 flag=1 為已經有算出答案，再輸入數字時清除答案後再輸入
+        function dis(val) {
+            if (flag != 0) {
+                clr();
+                flag = 0;
+            }
+            document.getElementById("result").value += val
+        }
+
+        // 按= 出現計算結果
+        function solve() {
+            let x = document.getElementById("result").value
+            let y = eval(x)
+            document.getElementById("result").value = y
+            flag = 1;
+        }
+
+        // 清除 
+        function clr() {
+            document.getElementById("result").value = "";
+        } 
+    </script>
+
+    <style>
+        button {
+            width: 100%;
+        }
+
+        table {
+            margin: auto;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        #calcul {
+            text-align: center;
+            position: fixed;
+        }
+    </style>
+
 </head>
 
 <body>
 
-   <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p>
-    
+    <!-- <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p> -->
+    <table>
+        <tr>
+            <td colspan="3"><input type="text" id="result" /></td>
+            <!-- 清除鍵 -->
+            <td><button type="button" class="btn btn-danger" onclick="clr()">c</button></td>
+        </tr>
+
+        <tr>
+            <td><button type="button" class="btn btn-secondary" onclick="dis('7')">7</button></td>
+            <td><button type="button" class="btn btn-secondary" onclick="dis('8')">8</button></td>
+            <td><button type="button" class="btn btn-secondary" onclick="dis('9')">9</button></td>
+            <td><button type="button" class="btn btn-info" onclick="dis('+')">+</button></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="btn btn-secondary" onclick="dis('4')">4</button></td>
+            <td><button type="button" class="btn btn-secondary" onclick="dis('5')">5</button></td>
+            <td><button type="button" class="btn btn-secondary" onclick="dis('6')">6</button></td>
+            <td><button type="button" class="btn btn-info" onclick="dis('-')">-</button></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="btn btn-secondary" onclick="dis('1')">1</button></td>
+            <td><button type="button" class="btn btn-secondary" onclick="dis('2')">2</button></td>
+            <td><button type="button" class="btn btn-secondary" onclick="dis('3')">3</button></td>
+            <td><button type="button" class="btn btn-info" onclick="dis('/')">/</button></td>
+        </tr>
+
+        <tr>
+            <td><button type="button" class="btn btn-secondary" onclick="dis('0')">0</button></td>
+            <td><button type="button" class="btn btn-secondary" onclick="dis('.')">.</button></td>
+            <td><button type="button" class="btn btn-primary" onclick="solve()">=</button></td>
+            <td><button type="button" class="btn btn-info" onclick="dis('*')">*</button></td>
+        </tr>
+    </table>
 </body>
 
 </html>
