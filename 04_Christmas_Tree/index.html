@@ -11,8 +11,31 @@
 </head>
 
 <body>
+    輸入樹的層級
+    <input type="text" id="treeTall">
+    <button onclick="mkTree()">送出</button>
+    <p id="tree">你的樹長在這裡</p>
 
     <script>
+        function mkTree() {
+            var xmas = document.getElementById("treeTall").value;
+            var stars = "";
+
+            for (var j = 1; j <= xmas; j++) {
+                for (var i = j; i < xmas; i++) {
+                    stars = stars + "&ensp;";
+                }
+
+                for (var i = j * 2 - 1; i > 0; i--) {
+                    stars = stars + "*";
+                }
+
+                stars = stars + "<br>";
+            }
+
+            document.getElementById("tree").innerHTML = stars;
+        }
+
         // 分解動作
         // 1. 觀察列和星星數量的變化: 星星數量 = 最終列 + 最終列 - 1
         //    1＝>1、2=>3、3=>5、4=>7、5=>9
