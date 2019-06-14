@@ -1,0 +1,30 @@
+button {
+    width: 100%;
+}
+
+table {
+    margin: auto;
+    width: 400px;
+    height: 500px;;
+}
+
+tr {
+    width: 400px;
+}
+
+td {
+    padding: 5px;
+}
+
+#calcul {
+    text-align: center;
+    position: fixed;
+}
+
+#after, #result {
+    width: 100%;
+}
+
+#space {
+    height :200px;
+}
