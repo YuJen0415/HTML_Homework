@@ -6,23 +6,33 @@
     <title>My Calculator</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/MyCalculator.css">
+    <link rel="stylesheet" href="css/MyCalculator.css">
 
     <script>
         var flag = 0;
-        var list;
-        // 輸入數字 flag=1 為已經有算出答案，再輸入數字時清除答案後再輸入
+        var list;   // 輸入後的運算式
+
         function dis(val) {
             if (flag != 0) {
+                // 上一個計算結果
                 var res = document.getElementById("result").value;
                 document.getElementById("after").value = list + " = " + res;
-                clr();
-                flag = 0;
+                // 判斷輸入是否為數字, 不是數字則把答案留下繼續做運算
+                if (isNaN(val)) {
+                    document.getElementById("result").value = res;
+                    flag = 0;
+                }
+                // 輸入數字時 flag=1為已經有算出答案，所以清除答案後再輸入
+                else {
+                    clr();
+                    flag = 0;
+                }
             }
+
             document.getElementById("result").value += val
         }
 
-        // 按 = 出現計算結果
+        // 按 = 出現計算結果, list存放計算結果
         function solve() {
             let x = document.getElementById("result").value
             list = x;
@@ -34,23 +44,30 @@
         // 清除 
         function clr() {
             document.getElementById("result").value = "";
+        }
+
+        // 全部清除
+        function clean() {
+            document.getElementById("after").value = "";
+            document.getElementById("result").value = "";
+            list = "";
         } 
     </script>
 </head>
 
 <body>
-
-    <!-- <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p> -->
     <table>
         <tr>
             <td id="space">
             </td>
         </tr>
         <tr>
-            <td colspan="4">
+            <td colspan="3">
                 <!-- 放入前一個算式與結果 -->
                 <input type="text" id="after">
             </td>
+            <!-- 全部清除 -->
+            <td><button type="button" class="btn btn-danger" onclick="clean()">clear</button></td>
         </tr>
         <tr>
             <td colspan="3"><input type="text" id="result"></td>
@@ -64,12 +81,14 @@
             <td><button type="button" class="btn btn-secondary" onclick="dis('9')">9</button></td>
             <td><button type="button" class="btn btn-info" onclick="dis('+')">+</button></td>
         </tr>
+
         <tr>
             <td><button type="button" class="btn btn-secondary" onclick="dis('4')">4</button></td>
             <td><button type="button" class="btn btn-secondary" onclick="dis('5')">5</button></td>
             <td><button type="button" class="btn btn-secondary" onclick="dis('6')">6</button></td>
             <td><button type="button" class="btn btn-info" onclick="dis('-')">-</button></td>
         </tr>
+
         <tr>
             <td><button type="button" class="btn btn-secondary" onclick="dis('1')">1</button></td>
             <td><button type="button" class="btn btn-secondary" onclick="dis('2')">2</button></td>
